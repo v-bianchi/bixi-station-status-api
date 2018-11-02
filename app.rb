@@ -11,8 +11,7 @@ def fetch_station(id)
 end
 
 get '/' do
-  'How to use this API'
-  # TODO: CREATE VIEW
+  erb :index
 end
 
 get '/stations/:id' do |id|
