@@ -3,10 +3,10 @@ require 'json'
 require 'open-uri'
 
 def fetch_station(id)
-  url = 'https://api-core.bixi.com/gbfs/en/station_status.json'
+  url = 'https://layer.bicyclesharing.net/map/v1/mtl/map-inventory'
   response_serialized = open(url).read
-  stations = JSON.parse(response_serialized)["data"]["stations"]
-  station_index = stations.find_index { |elt| elt["station_id"] == id }
+  stations = JSON.parse(response_serialized)["features"]
+  station_index = stations.find_index { |elt| elt["properties"]["station"]["id"] == id }
   return stations[station_index]
 end
 
@@ -20,12 +20,12 @@ end
 
 get '/stations/:id/bikes' do |id|
   station = fetch_station(id)
-  num_bikes = station["num_bikes_available"] + station["num_ebikes_available"]
+  num_bikes = station["properties"]["station"]["bikes_available"]
   { bike_qty: num_bikes }.to_json
 end
 
 get '/stations/:id/docks' do |id|
   station = fetch_station(id)
-  num_docks = station["num_docks_available"]
+  num_docks = station["properties"]["station"]["docks_available"]
   { dock_qty: num_docks }.to_json
 end
