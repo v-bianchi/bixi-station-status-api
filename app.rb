@@ -33,20 +33,18 @@ get '/stations/:terminal_id' do |terminal_id|
   single_station_data(terminal_id).to_json
 end
 
-get '/stations/:terminal_ids/bikes' do |terminal_ids|
+get '/stations/:terminal_ids/:query' do |terminal_ids, query|
+  halt 404 unless ['bikes', 'docks'].include? query
   stations = multiple_station_data(terminal_ids)
-  stations_bikes_only = {}
-  stations_bikes_only['bikes_available'] = stations.map do |station|
-    { station['properties']['station']['terminal'] => station['properties']['station']['bikes_available'] }
+  output = {
+    "available_#{query}_hash" => {},
+    "available_#{query}_array" => []
+  }
+  stations.each do |station|
+    terminal_id = station['properties']['station']['terminal']
+    quantity = station['properties']['station']["#{query}_available"]
+    output["available_#{query}_hash"][terminal_id] = quantity
+    output["available_#{query}_array"] << quantity
   end
-  stations_bikes_only.to_json
-end
-
-get '/stations/:terminal_ids/docks' do |terminal_ids|
-  stations = multiple_station_data(terminal_ids)
-  stations_bikes_only = {}
-  stations_bikes_only['docks_available'] = stations.map do |station|
-    { station['properties']['station']['terminal'] => station['properties']['station']['docks_available'] }
-  end
-  stations_bikes_only.to_json
+  output.to_json
 end
