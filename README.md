@@ -10,17 +10,17 @@ The original API's response is about 155kb, being quite hard to handle by microc
 Base URL
 ---
 
-bixi-station-status-api.herokuapp.com
+http://bixi-station-status-api.herokuapp.com
 
 ---
 Endpoints:
 ---
 
-/stations/:id
-Response: the station object with the specified ID
+/stations/:terminal_id
+Response: the station object with the specified terminal ID (e.g. 6137). You can see the stations' terminal IDs on the Bixi website.
 
-/stations/:id/bikes
-Response: number of available bikes (including e-bikes) at the given station. You can include multiple stations in one single request by inputting their numbers separated by `-` (e.g. /stations/10-76-12/bikes).
+/stations/:terminal_id/bikes
+Response: number of available bikes (including e-bikes) at the given station. You can include multiple stations in one single request by inputting their numbers separated by `-` (e.g. /stations/6001-6018-6411/bikes).
 
-/stations/:id/docks
-Response: number of available docks at the given station. You can include multiple stations in one single request by inputting their numbers separated by `-` (e.g. /stations/10-76-12/docks).
+/stations/:terminal_id/docks
+Response: number of available docks at the given station. You can include multiple stations as mentioned above.

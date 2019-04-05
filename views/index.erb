@@ -18,19 +18,28 @@
       </a>
     </p>
 
-    <h2>Endpoints:</h2>
+    <h2>Base Url</h2>
+    <p>http://bixi-station-status-api.herokuapp.com</p>
+
+    <h2>Endpoints</h2>
     <ul>
       <li>
-        <p><strong>/stations/:id</strong></p>
-        <p>Response: the station object with the specified ID</p>
+        <p><strong>/stations/:terminal_id</strong></p>
+        <p>
+          Response: the station object with the specified terminal ID (e.g. 6137). You can see the stations' terminal IDs on the Bixi website.
+        </p>
       </li>
       <li>
-        <p><strong>/stations/:id/bikes</strong></p>
-        <p>Response: number of available bikes (including e-bikes) at the given station</p>
+        <p><strong>/stations/:terminal_id/bikes</strong></p>
+        <p>
+          Response: number of available bikes (including e-bikes) at the given station. You can include multiple stations in one single request by inputting their numbers separated by a '-' (e.g. /stations/6001-6018-6411/bikes).
+        </p>
       </li>
       <li>
-        <p><strong>/stations/:id/docks</strong></p>
-        <p>Response: number of available docks at the given station</p>
+        <p><strong>/stations/:terminal_id/docks</strong></p>
+        <p>
+          Response: number of available docks at the given station. You can include multiple stations as mentioned above.
+        </p>
       </li>
     </ul>
 
