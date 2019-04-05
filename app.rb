@@ -30,7 +30,7 @@ get '/' do
 end
 
 get '/stations/:terminal_id' do |terminal_id|
-  JSON.pretty_generate(single_station_data(terminal_id))
+  single_station_data(terminal_id).to_json
 end
 
 get '/stations/:terminal_ids/bikes' do |terminal_ids|
@@ -39,7 +39,7 @@ get '/stations/:terminal_ids/bikes' do |terminal_ids|
   stations_bikes_only['bikes_available'] = stations.map do |station|
     { station['properties']['station']['terminal'] => station['properties']['station']['bikes_available'] }
   end
-  JSON.pretty_generate(stations_bikes_only)
+  stations_bikes_only.to_json
 end
 
 get '/stations/:terminal_ids/docks' do |terminal_ids|
@@ -48,5 +48,5 @@ get '/stations/:terminal_ids/docks' do |terminal_ids|
   stations_bikes_only['docks_available'] = stations.map do |station|
     { station['properties']['station']['terminal'] => station['properties']['station']['docks_available'] }
   end
-  JSON.pretty_generate(stations_bikes_only)
+  stations_bikes_only.to_json
 end
