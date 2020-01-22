@@ -1,4 +1,3 @@
-===
 BIXI Montreal station status intermediary API
 ===
 
@@ -6,13 +5,11 @@ This is an intermediary API created to retrieve more concise responses from the 
 
 The original API's response is about 155kb, being quite hard to handle by microcontrollers.
 
----
 Base URL
 ---
 
 http://bixi-station-status-api.herokuapp.com
 
----
 Endpoints:
 ---
 
